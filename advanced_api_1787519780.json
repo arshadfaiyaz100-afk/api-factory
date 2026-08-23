@@ -1,0 +1,97 @@
+import json
+
+import random
+
+from flask import Flask, jsonify
+
+app = Flask(__name__)
+
+# Hindi Jokes Data Matrix
+
+jokes_data = {
+
+    "setup": [
+
+        "मेरे दोस्त ने मुझसे कहा",
+
+        "एक दिन मैंने सोचा",
+
+        "मैंने अपने पिता से पूछा",
+
+        "मेरी माँ ने मुझसे कहा",
+
+        "मैंने अपने भाई से पूछा",
+
+        "एक आदमी ने मुझसे कहा",
+
+        "मैंने एक आदमी से पूछा",
+
+        "एक औरत ने मुझसे कहा",
+
+        "मैंने एक औरत से पूछा",
+
+        "एक लड़का ने मुझसे कहा",
+
+        "मैंने एक लड़के से पूछा",
+
+        "एक लड़की ने मुझसे कहा",
+
+        "मैंने एक लड़की से पूछा"
+
+    ],
+
+    "punchline": [
+
+        "कि वह मुझसे नाराज़ है",
+
+        "कि वह मुझसे प्यार करता है",
+
+        "कि वह मुझे पसंद करता है",
+
+        "कि वह मुझसे खुश है",
+
+        "कि वह मुझसे गुस्से में है",
+
+        "कि वह मुझे समझता है",
+
+        "कि वह मुझसे सहमत है",
+
+        "कि वह मुझे पसंद नहीं करता",
+
+        "कि वह मुझसे नफरत करता है",
+
+        "कि वह मुझे भूल गया है",
+
+        "कि वह मुझे याद करता है",
+
+        "कि वह मुझसे मिलना चाहता है",
+
+        "कि वह मुझसे बात करना चाहता है"
+
+    ]
+
+}
+
+# Smart Shuffling Algorithm
+
+def generate_joke():
+
+    setup = random.choice(jokes_data["setup"])
+
+    punchline = random.choice(jokes_data["punchline"])
+
+    return {"setup": setup, "punchline": punchline}
+
+# API Endpoint
+
+@app.route('/joke', methods=['GET'])
+
+def get_joke():
+
+    joke = generate_joke()
+
+    return jsonify(joke)
+
+if __name__ == '__main__':
+
+    app.run(debug=True)
